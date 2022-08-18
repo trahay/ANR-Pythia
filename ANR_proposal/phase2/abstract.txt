@@ -1,0 +1,37 @@
+Les support d'execution prennent des décisions critiques pour les
+performances d'applications parallèles. Malheureusement, ces décisions
+ne peuvent se baser que sur des heuristiques prenant en compte l'état
+actuel de l'application, et estimant son comportement probable dans le
+futur. Par conséquent, les supports d'exécution prennent parfois des
+décisions qui détériorent les performances au lieu de les améliorer.
+
+Pythia vise à fournir aux supports d'exécution des moyens de prédire
+le futur de manière précise. Pour cela, Pythia se base sur la nature
+déterministe de la plupart des applications parallèles : généralement,
+un programme aura le même comportement d'une exécution à l'autre. Dans
+le cadre de Pythia, nous concevrons une chaîne d'outils qui analyse
+l'exécution d'un programme afin de fournir aux supports d'exécution
+des indications lors d'exécutions futures du même programme. Grâce à
+des indications, un support d'exécution pourrait prendre des décisions
+en se basant à la fois sur l'état actuel de l'application, et sur le
+comportement futur du programme.
+
+
+
+
+Runtime systems have to take decision that are critical for the
+performances of parallel applications. Unfortunately, these decisions
+can only use heuristics based on the current status of the application
+in order to estimate how it will behave in the future. As a
+consequence, runtime systems may take decisions that degrade
+performances instead of improving them.
+
+Pythia aims at providing runtime systems with means to accurately
+predict the future. For this, Pythia relies on the deterministic
+nature of most parallel applications: most programs will behave
+similarly from one run to another. Thus, we will design a tool-chain
+that analyzes the execution of a program to provide hints to the
+runtime systems during future executions of the same program. Thanks
+to these hints, a runtime system could base its decisions on both the
+current status of the application, and the future behavior of the
+program.
