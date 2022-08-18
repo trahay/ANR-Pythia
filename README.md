@@ -29,12 +29,12 @@ comportement futur du programme.
 
 - **Développement d’EZTrace 2.0** : une refonte du code source a
 permis de simplifier sa maintenance et de rendre le logiciel plus
-portable. [code source](https://gitlab.com/eztrace/eztrace)
+portable. [[code source](https://gitlab.com/eztrace/eztrace)]
 
 - **Développement de l’outil d’analyse de trace EasyTraceAnalyzer** :
 un outil extensible permettant l’implémentation d’analyses variés sur
-des traces dans des formats divers.[code
-source](https://gitlab.com/parallel-and-distributed-systems/easytraceanalyzer)
+des traces dans des formats divers. [[code
+source](https://gitlab.com/parallel-and-distributed-systems/easytraceanalyzer)]
 
 
 ## Documents utiles
