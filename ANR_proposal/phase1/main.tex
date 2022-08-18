@@ -1,0 +1,758 @@
+% Ne pas mettre de tilde (~), mais un blanc, avant \cite
+
+% Il est recommandé d’utiliser une mise en page permettant une lecture
+% confortable du document (page A4, times 11 ou équivalent, interligne
+% simple, marges 2 cm ou plus, numérotation des pages).
+
+\documentclass[a4paper,11pt,defblank]{article}
+%\usepackage{times}
+\usepackage{fullpage}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{tabularx}
+\usepackage[obeyspaces]{url} \urlstyle{sf} %% URLs 
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{makecell}
+\usepackage{multicol}
+\usepackage{multirow}
+%\usepackage{bibtopic}
+\usepackage{eurosym}
+\usepackage{calc}
+\usepackage{cite}
+\usepackage{paralist, tabularx}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{ifthen}
+\usepackage{amsfonts,amsmath} %% Additional math chars
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+\usepackage{paralist} % inline lists 
+\usepackage{hhline}
+\usepackage{dashrule}
+\usepackage{arydshln}
+\usepackage{xspace}
+\usepackage[light,math]{iwona}
+
+\hyphenation{In-ves-tis-se-ment In-volve-ment}
+
+\usepackage[pdftex,                %
+  bookmarks         = true,          % Signets
+  bookmarksnumbered = true,%     % Signets numérotés
+  pdfstartview      = FitH,%     % La page prend toute la largeur
+  pdfpagelayout     = SinglePage,% Vue par page
+  colorlinks        = true,%     % Liens en couleur
+  urlcolor          = blue,%     % Couleur des liens externes
+  citecolor         = Blue,
+  linkcolor         = Blue,
+  pdfborder         = {0 0 0}%   % Style de bordure : ici, pas de bordure
+]{hyperref}%                   % Utilisation de HyperTeX 
+
+
+\setlength{\parskip}{1.2ex plus .4ex minus .4ex}
+\setlength{\parindent}{0pt}
+
+\titleformat{\section} % command
+  [hang]     % shape
+  {\normalfont\centering\large\scshape\bfseries\color{Blue}} % format Plum
+  {\thesection} % label
+  {1em} % sep
+  {\vspace{-3mm}} % before
+  [\vspace{0ex}\titlerule] % after
+\titlespacing*{\section}{0em}{0.5em}{0.3em}
+
+\titleformat{\subsection} % command
+  [hang]     % shape
+  {\normalfont\large\bfseries\color{Mahogany}} % format
+  {\thesubsection} % label
+  {1em} % sep
+  {} % before
+  [\titlerule] % after
+\titlespacing*{\subsection}{0em}{0.4em}{0.2em}
+
+\titleformat{\subsubsection} % command
+  [hang]     % shape
+  {\normalfont\bfseries\color{NavyBlue}} % format NavyBlue
+  {\thesubsubsection} % label
+  {0em} % sep
+  {\vspace{-7mm}} % before
+  [\titlerule\vspace{-2mm}] % after
+
+\renewcommand{\thesection}{\Roman{section}.}
+\renewcommand{\thesubsection}{\thesection\arabic{subsection}.}
+\renewcommand{\thesubsubsection}{}
+
+\newboolean{showinstructions}
+%\setboolean{showinstructions}{true}
+\setboolean{showinstructions}{false} 
+
+\ifthenelse{\boolean{showinstructions}}
+ { \newcommand{\instructions}[1]{
+        {\noindent\fbox{\parbox{\linewidth-2\fboxrule-2\fboxsep}{#1}}}}}
+ { \newcommand{\instructions}[1]{}}
+
+\newboolean{showcomments}
+\setboolean{showcomments}{true}
+%\setboolean{showcomments}{false}
+
+\ifthenelse{\boolean{showcomments}}
+           { \newcommand{\mynote}[2]{
+               \fbox{\color{Red}\bfseries\sffamily\scriptsize#1}
+               %{\small\emph{\color{Tan}#2}}}}
+                    {\small\sffamily{\color{Tan}#2}}}}
+           { \newcommand{\mynote}[2]{}}
+
+\newcommand{\todo}[1]{\mynote{TODO}{#1}}
+\newcommand{\warning}[1]{\mynote{WARNING}{\textbf{#1}}}
+\newcommand{\gael}[1]{\mynote{Ga\"el}{#1}}
+\newcommand{\trahay}[1]{\mynote{FTrahay}{#1}}
+
+\newcommand{\telecom}[1]{\mynote{Telecom}{#1}}
+\newcommand{\pname}{\textsc{Pythia}\xspace}
+
+\begin{document}
+
+\setcounter{secnumdepth}{0}
+
+% feedback
+% oracle
+% framework
+% runtime strategy
+\begin{center}
+  {\Large\sc\bf\color{Brown}
+    \pname: runtime decisions based on prediction (duration: 36 months)
+  }\\
+
+  \vspace{0.4cm}
+
+  {
+    \footnotesize
+    \pname -- Common 2018 ANR call - JCJC (Jeunes chercheuses/Jeunes chercheurs)\\
+    Défi 7 -- Axe 2: Sciences et technologies logicielles
+  }
+\end{center}
+
+\instructions{
+A titre indicatif, le montant moyen de l’aide allouée aux projets JCJC à l’appel à projets 2016
+est de 245 k\euro pour des durées de 24 à 48 mois.
+}
+
+\instructions{
+  Critères d'évaluation:
+  \begin{itemize}
+  \item Qualité et ambition scientifique (critère discriminant : notation A obligatoire)
+    \begin{itemize}
+    \item Clarté des objectifs et des hypothèses de recherche
+    \item Caractère novateur, originalité, progrès par rapport à l’état de l’art
+    \end{itemize}
+
+  \item Organisation du projet et moyens mis en œuvre
+    \begin{itemize}
+    \item Compétence, expertise et implication du coordinateur scientifique et des
+      partenaires
+    \item Qualité et potentiel du JCJC et de son équipe, Pour les JCJC
+    \end{itemize}
+
+  \item Impact et retombées du projet8
+    \begin{itemize}
+    \item Capacité du projet à répondre aux enjeux de recherche définis dans le plan d’action
+    \item Impact potentiel dans les domaines scientifique, économique, social ou culturel
+    \end{itemize}
+  \end{itemize}
+}
+
+
+\section{Context, positioning and objectives}
+% I. Contexte, positionnement et objectif(s) de la proposition
+
+\instructions{
+Sur une page et demie (1,5) environ,
+- Décrire les objectifs et les hypothèses scientifiques
+- Montrer l’originalité et la pertinence par rapport à l’état de l’art
+- Décrire la méthodologie et la gestion des risques
+
+Important:
+- caractère novateur, originalité, progres par rapport à l'état de l'art
+- clarté des objectifs et des hypothèses de recherche
+}
+
+\textbf{Context.}  High performance computing has become the
+cornerstone of many scientific fields ranging from medical research
+to climatology.
+%
+Efficiently exploiting a supercomputer is difficult. In addition to
+expressing the parallelism of an application, it is necessary to
+manage the hardware resources of the machine. The way an application
+uses the hardware resources may have a significant impact on the
+performance: for instance, allocating memory correctly may improve an
+application execution time by 3.6x relative the default allocation
+strategy \cite{carrefour}.
+
+Runtime systems take the responsibility of exploiting the hardware in
+place of the program developer by providing an interface to the
+application. The task of defining efficient strategies for a
+particular hardware setting thus falls to the runtime, and the
+developer can focus on algorithmic.
+%
+When selecting a strategy, runtime systems analyze how the application
+behaved in the past in order to predict how it will behave in the
+future.
+%
+For example, some I/O libraries analyze the data read requests of an
+application in order to read the next blocks of data in advance and to
+improve the performance of I/O operations.
+
+However, the runtime only reacts to the application instead of
+anticipating its behavior. This leads to multiple problems as some
+early decisions may conflict with later ones. For instance, the
+location where memory is initially allocated has a significant impact
+on further memory operations and the overhead of moving a memory page
+closer to a thread is significant for the application
+performance. Reacting to the application is also a problem for
+irregular applications where predicting the future behavior based on
+past event is difficult.
+
+%However, designing heuristics to predict the future behavior of an
+%application is difficult because the runtime has to do a trade-off
+%between the accuracy of the prediction and the computation cost of the
+%heuristic.
+
+% souvent, les vrai applications ont plusieurs phases avec des comportements differents
+%  les decisions du runtime dépendent donc de la phase en cours
+
+% Moreover, the behavior of real-life applications can change depending
+% on the phases of the application. A runtime decision that is best
+% suited for one phase may degrade the performance for another phase of
+% the application.
+
+
+\textbf{Positioning.}
+
+
+%Analyzing past executions of an application in order to predict its
+%future behavior has mostly been studied in order to estimate the
+%application execution time \cite{smith1998predicting, nudd2000pace}.
+
+
+% ya plein de travaux pour améliorer les perfs d'une maniere generale
+When deciding which execution strategy to apply, runtime systems try
+to predict the future behavior of an application. StarPU estimates
+the duration of a task to execute on a computing resource by
+analyzing the past execution of similar tasks\cite{starpu}.
+
+
+% thread binding
+The affinity between threads and their data has been extensively
+studied. Most work focus on detecting affinity problems in order to
+react to them \cite{carrefour, diener2014kmaf}. Some other work
+proactively place data and threads in order to improve the locality of
+memory access. For this, predicting the affinity between threads is
+mandatory. This can be predicted for some programming models like
+OpenMP \cite{forestgomp}. Thus, these work either react to bad
+locality at runtime, or statically place threads and memory at the
+application startup. None of these work can proactively adapt the
+thread placement depending on the application phase.
+
+% prefetching
+Prefetching disk I/O has been extensively studied for decades. The
+basic idea of prefetching is to predict the blocks of data that are
+likely to be read in the future in order to load them in advance and
+to overlap the disk access with computation
+\cite{cao1996implementation, ding2007diskseen, prefetch_liao}.
+%
+While analyzing past I/O access permits to predict the future access
+for regular access patterns, other techniques have to be applied for
+irregular access patterns.
+%
+Early works have focused on means for the developer to provide hints
+on future I/O operations to the I/O library \cite{Patterson}. This
+allows irregular access patterns to be predicted, but at the cost of a
+manual modification of the application.
+%
+Some work try to predict the future access
+by speculatively executing the application in order to detect future
+I/O requests \cite{chang1999automatic}.
+
+
+All the existing work either react to the application behavior by
+analyzing the events that happened during a temporal window, or use
+heuristics that apply a strategy once and for all. Instead, we
+propose to proactively take runtime decisions based on predictions of
+the future behavior of the application.
+
+
+\textbf{Objectives.}
+
+The main goal of the \textbf{\pname} project is to design a framework
+that proactively takes decisions using an oracle that provides the
+runtime with predictions. By knowing the future, the runtime system
+can take the decisions that will minimize the application execution
+time.
+
+The general idea of this project is to take advantage of the
+determinism of most HPC applications to predict their behavior: most
+applications have similar behavior from one execution to another (even
+when the input data changes). Thus, we propose to design a framework
+that will capture the application execution, analyze it, and serve as
+an oracle for the runtime system for future executions of the same
+application. When running the application again, the runtime
+dynamically builds a state automaton and compares it to the one
+provided by the oracle in order to predict the future behavior of the
+program.
+
+The runtime decisions that can be taken by knowing the future are
+various and range from HPC-specific optimisations to more general
+decisions that could improve the performance of web
+services. Oracle-based decisions could allow runtime systems to
+schedule threads close to the resources they are about to use, to
+prefetch data from disks, to reduce the CPU frequency of a task that
+is not on the critical path, etc.
+
+The \pname tool-chain will be composed of three key components:
+\begin{itemize}
+\item a trace collection tool for capturing the application
+  execution. The tracing tool intercepts the application calls to a
+  set of functions (MPI functions, OpenMP parallel constructs, etc.)
+  and record events in trace files. This tool will be based on EZTrace
+  \cite{eztrace}, a framework for performance analysis developed at
+  Télécom SudParis.
+
+\item a post-mortem analysis tool that will analyze the traces,
+  detects recurrent patterns of events, and generate a summary. The
+  output of this tool is a state automaton that describes the
+  successions of interactions between the application and the runtime
+  system. We will extend a pattern discovery tool we developed in the
+  past~\cite{eztrace_pdp} in order to interact with the other parts of
+  the tool-chain.
+
+\item a runtime system that uses the results of the post-mortem
+  analysis tool to decide which strategy is the best-suited. During
+  the execution of the application, a state automaton describing the
+  sequence of events is generated and is
+  compared to the automaton generated offline in order to predict the
+  events that will happen in the near future. The runtime system can
+  thus base its decisions on the events that are likely to happen next.
+\end{itemize}
+
+To demonstrate the applicability of the \pname tool-chain, we will
+implement a set of runtime heuristics for various subsystems. While
+the tool-chain offers many possibilities of optimization, we will
+focus on two runtime decisions in this project: thread binding based
+on the used resources, and I/O prefetching.
+
+\textbf{Thread binding:} The affinity between a thread and the
+resources it uses (network controllers, disks, memory banks, etc.) is
+critical for performance \cite{nuioa}. As an application runs, its
+threads use multiple resources that may vary from one phase to
+another. Thanks to its knowledge of the future behavior of a thread,
+the runtime system could migrate the thread close to the resource it
+is about to use extensively in order to improve the locality of the
+thread and thus the performance.
+
+\textbf{I/O prefetching} Since fetching data from disk is orders of
+magnitude slower than accessing data from the memory, disk I/O may
+have a huge impact on the performance of some applications. As a
+result, predicting which data will be accessed in the future is
+critical for performance. While regular I/O access patterns can be
+predicted \cite{cao1996implementation}, irregular patterns cannot be predicted
+from past access only. The sequences of events from the past
+executions of an application could be used to predict even irregular
+I/O access that will be issued by a program.
+
+% conclusion ?
+
+% the goal is to design a tool chain that shows the feasibility of
+% taking runtime decisions based on previous execution.
+% This approach could later be applied to many other runtime strategies such as
+% - reducing energy consumption by reducing the cpu frequency of a task that will
+%   have to wait for other tasks
+% - selecting an openmp scheduling policy based on previous executions
+% - using the behaviour of the application on a small dataset to infer its behaviour for large datasets
+
+
+% Idées d'optimisations intéressantes: ca permet de détecter les phases de l'application et de prendre des décisions rapidement:
+% \begin{itemize}
+% \item prefetching IO: on sait quels offsets vont etre lu, donc on les précharge
+% \item placement des threads en fonction des phases. eg. thread 1 va beaucoup utiliser la carte réseau, on le place à coté. Thread 1 et 2 vont beaucoup travailler ensemble, on les rapproche
+%  \item exemple: memory placement (where should data be allocated) -> pas besoin de patterns pour ça
+%  \item exemple: prefetching IO ->
+%  \item exemple: MPI: progression des comm, rdv, collective
+%    \begin{itemize}
+%    \item on sait si un mpi\_wait va durer longtemps -> on choisi polling/intterupt, on fait progresser les autres, on change la freq du proc (->green)
+%    \end{itemize}
+%  \item exemple: OpenMP: durée d'exécution de chaque itération -> schedule
+%% \end{itemize}
+
+% \begin{itemize}
+% \item runtime system take decisions at runtime based on heuristics that try to predict the future
+%   \begin{itemize}
+%   \item it is hard to predict the future
+%   \item decision have to be take fast in order to reduce the overhead of the runtime on the application
+%   \end{itemize}
+% \item many applications have the same behavior from one run to another
+% \item performance analysis tools can detect the bad decision of runtime systems that led to performance problems (load imbalance, bad locality, etc.)
+% \end{itemize}
+
+
+\section{Project organisation}
+\instructions{
+  Sur une demi (0,5) page environ,
+  \begin{itemize}
+  \item Présenter succinctement le coordinateur scientifique, sa situation
+    au moment de la soumission et lors de la mise en œuvre du projet,
+    son rôle dans le projet
+  \item Présenter l’équipe du coordinateur
+    scientifique et son positionnement scientifique au sein de
+    l’organisme ou du laboratoire d’accueil.
+  \item Décrire succinctement les
+    moyens mis en œuvre pour atteindre les objectifs :
+    \begin{itemize}
+    \item Indiquer
+      notamment le montant total de l’aide prévisionnelle demandée, sa
+      répartition entre grands postes de dépenses (équipement, personnel,
+      prestations, autre fonctionnement) et les moyens de recherche
+      complémentaires au projet.
+    \end{itemize}
+  \end{itemize}
+}
+
+% presentation coordinateur
+The Principal Investigator of the \pname project is François Trahay. He
+will devote eighty percent of his research time to the project.
+François Trahay is an associate professor at Télécom SudParis (TSP)
+since 2011.
+%
+He is a member of the HP2 team of the computer science
+department, which investigates high-performance systems.
+%
+He received his Ph.D. degree in computer science from the University
+of Bordeaux in 2009. He has been working on runtime systems for high
+performance computing since 2006. His research interests now mostly
+focus on performance analysis for HPC and distributed systems. He is
+the project leader and main developper of the EZTrace framework for
+performance analysis.
+%
+He is the co-author of 19 research papers in top international
+conferences, workshops and journals such as IEEE TPDS, IPDPS, ICPP, IEEE
+Cluster, ACM TACO, or IJPP.
+
+% présenter l'équipe
+In addition to the principal investigator, the project will involve
+the HP2 team at Télécom SudParis. HP2 is composed of experts in
+runtime systems for high-performance computing (Dr. {\'E}lisabeth
+Brunet, and Dr. Amina Guermouche), and for operating systems
+(Prof. Gaël Thomas).% It is leaded by professor Gaël Thomas.
+
+% indiquer les moyens (moyen demandé, répartition), + moyens complémentaires
+\begin{paragraph}{Funding}
+  For this project, we ask for 168k{\euro}. Included in this budget
+  are: a PhD student ($\sim$ 110k\euro) , a large (100+ cores) NUMA
+  machine for running experiments ($\sim$ 30k\euro),
+  two annual trips to conferences for two researchers ($\sim$
+  20k\euro), and the funding for organizing two workshops ($\sim$
+  8k\euro).
+\end{paragraph}
+
+\section{Impact}
+\instructions{
+  Sur une (1) page environ,
+  \begin{itemize}
+  \item Décrire dans quel(s) domaine(s) (scientifique, économique,
+    social ou culturel) les résultats du projet peuvent avoir un
+    impact
+  \item Décrire en quoi les attendus du projet répondent aux enjeux
+    d’un (axe de) défi du Plan d’Action 2017 de l’ANR, de la SNR, de
+    la recherche fondamentale
+  \item Décrire la stratégie de diffusion et/ou de valorisation
+    envisagée : l’objectif est d’indiquer comment les résultats seront
+    diffusés et/ou valorisés (publications scientifiques ou grand
+    public, brevets, etc.), et non de détailler les modalités de
+    partage de l’éventuelle propriété intellectuelle entre partenaires
+  \end{itemize}
+}
+
+%  Décrire dans quel(s) domaine(s) (scientifique, économique, social
+%  ou culturel) les résultats du projet peuvent avoir un impact
+
+In the short term, we expect that the result of the \pname project
+will impact most HPC applications as the problematics of locality and
+I/O overhead is commonplace.
+%
+Furthermore, this project addresses several challenges (scheduling,
+I/O, auto-tuning, etc. ) from the Challenges of Exascale Computing
+\cite{exascale_challenges}.
+
+In the long-term, we expect that the \pname project will change the
+way runtime systems are designed, and the tool-chain will be used for
+other runtime decisions.
+
+
+% Décrire en quoi les attendus du projet répondent aux enjeux d’un
+% (axe de) défi du Plan d’Action 2017 de l’ANR, de la SNR, de la
+% recherche fondamentale
+
+This project mainly addresses the ``Défi 7 > Axe 2 > Science et
+Technologies logicielles'' challenge. Indeed, \pname will design
+mechanisms that allow runtime systems to take better decisions. While
+the two example runtimes that will be designed will focus on
+performance of HPC applications, we expect that the mechanisms
+provided by \pname could be used to other domains (eg. big data) and
+to other means (eg. reducing energy consumption).
+%
+\pname will also address several \emph{Technical Research Priorities}
+from the ETP4HPC Strategic Research Agenda \cite{etp4hpc} including priority
+\#2 System software and management, and priority \#3 programming
+environment.
+
+% results: an open-source tool chain for performance analysis
+% science: new data mining methods for performance analysis
+% 
+
+% As primary use cases, the Swipe project will study applications from
+% three emerging domains that are of prime importance for France and
+% Europe: (i) Neuroimaging, a core research and medical priority; (ii)
+% Biometrics, a key technological field for the management of numerical
+% identity, improvement of border control security solutions,
+% development of law enforcement capabilities to detect and analyze
+% organized crime trends; (iii) Large-scale cloud storage, a field of
+% major economic importance, which is also related to technical
+% sovereignty issues for citizens and businesses.
+
+The investigator of the project will continue his commitment to
+open-source as all the tools developed during the
+project will be freely available as open-source software.
+%
+Besides, the software will be maintained beyond the end of
+the project and efforts will be made to bootstrap a visible and
+active community of users and contributors, through appropriate
+channels and organizations.
+%\todo{transfert vers l'industrie ?}
+
+We expect that the outcome of the project will trigger collaborations
+or enforce existing ones. \pname could be used as part of the new
+collaborations that we started with INSA Lyon and CEA. François
+Trahay is currently initiating a collaboration with DDN, the leading
+company on I/O architectures for HPC. We expect that \pname could be
+part of a supplementary relationship with DDN. Finally, François
+Trahay already worked on parallel I/O \cite{prefetch_liao} with
+researchers for the Southwest University in Chongqing (China). \pname
+could be used for continuing such international collaborations.
+
+The scientific results of this project will be published in major
+conferences and journals related to high-performance computing,
+operating systems, distributed and parallel systems, performance
+analysis such as IPDPS, ASPLOS, or SOSP.
+
+% In terms of exploitation, we envision the following
+% strategy.
+% The collection of open-source tools released
+% will form an ecosystem, which companies may leverage to
+% market new services and/or products (e.g., domain-specific tools).
+% %\gael{Pas bien compris cette phrase ``second''?}
+% In particular, the Swipe project has the potential to foster the
+% emergence of world-class leaders in the young and promising market of
+% automatic tools for performance analysis.
+
+
+% \newpage
+% \section{Annexes}
+% 
+% \subsection{Resume -- François \textsc{Trahay}}
+% François \textsc{Trahay} -- Born on 1983/05/03 in Angers --
+% web: \url{http://trahay.wp.tem-tsp.eu/}
+% 
+% My research focuses on \textbf{performance analysis} for high performance
+% systems as well as on \textbf{runtime systems} for HPC.
+% 
+% \subsubsection{Education \& Experience}
+% 
+% \begin{tabular}{c@{ \,\, }p{0.8\textwidth}}
+%   2011--present &
+%   \textbf{Associate Professor} at Télécom SudParis, 
+%   Computer science department, 
+%   UMR 5157 CNRS Samovar lab (ACMES group)\\
+% 
+%   2010 & \textbf{Postdoc} researcher at Riken in the Ishikawa lab, University of Tokyo\\
+% 
+%   2009--2010& \textbf{Teacher assistant} (ATER) at the Technical Institute of
+%   the University of Bordeaux (IUT)\\
+% 
+%   2006--2009 & \textbf{Ph.D. Thesis} at the University of Bordeaux / INRIA Runtime team, advisors:
+%   Prof. Raymond \textsc{Namyst} and Dr. Alexandre \textsc{Denis}\\
+% \end{tabular}
+% 
+% \subsubsection{Student Supervisions}
+% \begin{enumerate}
+%   \setlength\itemsep{-2mm}
+% \item Mohamed Said \textsc{Mosli Bouksiaa}, PhD student (2014 - 2017,  70\% with Gaël \textsc{Thomas}): Performance analysis using pattern of events. IMT excellence grant.
+% \item Mathias \textsc{Hastaran}, Research Engineer (2015) at INRIA Bordeaux. INRIA ADT grant.
+% \item Roman \textsc{Iakymchuk}, PostDoc researcher (2012 - 2013): Performance analysis tools for embedded systems. Carnot grant.
+% \end{enumerate}
+% 
+% \subsubsection{Software}
+% \begin{enumerate}
+% \item \textbf{EZTrace} -- Lead and main contributor of the EZTrace project. web site: \url{http://eztrace.gforge.inria.fr/}. Started in 2010 in collaboration with INRIA.
+% \item \textbf{PM2} -- developer in the PM2 software suite from 2006 to
+%   2010. Design and implementation of the PIOMan progression engine,
+%   and integration to the NewMadeleine communication library and to
+%   MPICH.
+% \end{enumerate}
+% 
+% \subsubsection{Publications}
+% \begin{enumerate}
+% \setlength\itemsep{-2mm}
+% \item R. Habel, F. Silber-Chaussumier, F. Irigoin,
+%   É. Brunet, \textbf{F. Trahay}. Combining Data and Computation
+%   Distribution Directives for Hybrid Parallel Programming : A
+%   Transformation System. In \emph{International Journal of Parallel
+%     Programming (IJPP)}, 2016. ERA Core A journal.
+% \item A. Denis, \textbf{F. Trahay}. MPI Overlap: Benchmark and
+%   Analysis.  In \emph{International Conference on Parallel Processing
+%     (ICPP)}, 2016. ERA Core A.
+% \item J. Liao, \textbf{F. Trahay}, and Guoqiang Xiao. Dynamic
+%   Process Migration based on Block Access Patterns occurred in Storage
+%   Servers.  In \emph{ACM Transactions on Architecture and Code
+%     Optimization (TACO)}, 2016. ERA Core A journal.
+% \item J. Liao, \textbf{F. Trahay}, B. Gerofi and Y.
+%   Ishikawa. Prefetching on Storage Servers through Mining Access
+%   Patterns on Blocks.  In \emph{IEEE Transactions on Parallel and
+%     Distributed Systems}, 2015. ERA Core A* journal.
+%   \item P. Li, É. Brunet, \textbf{F. Trahay}, C. Parrot,
+%     G. Thomas and R. Namyst. Automatic OpenCL code generation
+%     for multi-device heterogeneous architectures In
+%     \emph{International Conference on Parallel Processing (ICPP)},
+%     2015. ERA Core A.
+% \item \textbf{F. Trahay}, É. Brunet, M. Mosli Bouksiaa,
+%   J. Liao. Selecting points of interest in traces using patterns
+%   of events.  In \emph{Euromicro International Conference on Parallel,
+%     Distributed and Network Based Processing (PDP)}, 2015. ERA Core C.
+% \item J. Liao, \textbf{F. Trahay}, G. Xiao, L. Li and Y.
+%   Ishikawa. Performing Initiative Data Prefetching in Distributed File
+%   Systems for Cloud Computing. In \emph{IEEE Transactions on Cloud Computing},
+%   2015, vol. 4. ISI Web of knowledge.
+% \item R. Iakymchuk, \textbf{F. Trahay}. Performance Analysis on Energy
+%   Efficient High-Performance Architectures. In \emph{International
+%     Conference on Cluster Computing (CC)}, 2013.
+% \item C. Aulagnon, D. Martin-Guillerez, F. Rue,
+%   \textbf{F. Trahay}. Runtime function instrumentation with EZTrace.  In
+%   \emph{PROPER - Workshop on Productivity and Performance}, 2012.
+% \item A. Denis, \textbf{F. Trahay} and Y.
+%   Ishikawa. High-performance checksum computation for fault-tolerant
+%   MPI over InfiniBand.  In \emph{EuroMPI}, 2012. ERA Core C.
+% \item K. Coulomb, A. Degomme, M. Faverge, and \textbf{F.
+%   Trahay}. An open-source tool-chain for performance analysis.  In
+%   \emph{the 5th parallel Tools Workshop (PSTI)}, 2011.
+% \item É. Brunet, \textbf{F. Trahay}, R. Namyst, and A.
+%   Denis. A sampling-based approach for communication libraries
+%   auto-tuning.  In \emph{IEEE International Conference on Cluster
+%     Computing (IEEE Cluster)}, 2011. ERA Core A.
+% \item \textbf{F. Trahay}, F. Rue, M. Faverge, Y. Ishikawa,
+%   R. Namyst and J. Dongarra. EZTrace: a generic framework for
+%   performance analysis.  In \emph{IEEE/ACM International Symposium on
+%     Cluster, Cloud and Grid computing (CCGrid)}, 2011.  Poster
+%   session. ERA Core A.
+% \item \textbf{F. Trahay}. De l’interaction des communications et de
+%   l’ordonnancement de threads au sein des grappes de machines
+%   multi-coeurs.  \emph{PhD Thesis}, 2009, Université Bordeaux 1.
+% \item \textbf{F. Trahay} and A. Denis. A scalable and generic task
+%   scheduling system for communication libraries.  In \emph{IEEE
+%     International Conference on Cluster Computing (Cluster)},
+%   2009. ERA Core A.
+% \item G. Mercier, \textbf{F. Trahay}, D. Buntinas, and
+%   É. Brunet. NewMadeleine: An Efficient Support for
+%   High-Performance Networks in MPICH2.  In \emph{IEEE International
+%     Parallel and Distributed Processing Symposium (IPDPS)}, 2009. ERA
+%   Core A.
+% \item \textbf{F. Trahay}, É. Brunet, and A. Denis. An
+%   analysis of the impact of multi-threading on communication
+%   performance.  In \emph{Workshop on Communication
+%     Architecture for Clusters (CAC)}, 2009.
+% \item É. Brunet, \textbf{F. Trahay}, and A. Denis. A
+%   Multicore-enabled Multirail Communication Engine.  In \emph{IEEE
+%     International Conference on Cluster Computing (IEEE Cluster)},
+%   2008. ERA Core A.
+% \item \textbf{F. Trahay}, É. Brunet, A. Denis, and R.
+%   Namyst. A multithreaded communication engine for multicore
+%   architectures.  In \emph{Workshop on Communication
+%     Architecture for Clusters (CAC)}, 2008.
+% \item \textbf{F. Trahay}, A. Denis, O. Aumage, and R.
+%   Namyst. Improving Reactivity and Communication Overlap in MPI using a
+%   Generic I/O Manager.  In \emph{EuroPVM/MPI}, 2007. ERA Core C.
+% \end{enumerate}
+
+
+% \renewcommand{\addcontentsline}[3]{}% Remove functionality of \addcontentsline
+% \begin{thebibliography}{1}
+% %% small version: uncomment after
+% \setlength{\itemsep}{-1.5mm}
+% \footnotesize
+% 
+% \bibitem{carrefour} M. Dashti {\it et al.} {Traffic management: a
+%   holistic approach to memory placement on NUMA systems}. In {\em
+%   ASPLOS}, 2013.
+% 
+% \bibitem{scalasca} M. Geimer {\it et al.} {The Scalasca performance toolset architecture}. In {\em Concurrency and Computation: Practice and Experience}, 2010.
+% 
+% \bibitem{periscope} S. Benedict {\it et al.} {Periscope: An online-based distributed performance analysis tool}. In {\em Tools for High Performance Computing}, 2009.
+% 
+% \bibitem{xray} M. Attariyan {\it et al.} {{X-ray: Automating Root-Cause Diagnosis of Performance Anomalies in Production Software.}} In {\em OSDI'12}.
+% 
+% \bibitem{project5} M. Aguilera {\it et al.} Performance Debugging for Distributed Systems of Black Boxes. In {\em SOSP'03}.
+% 
+% \bibitem{wap5}	P. Reynolds {\it et al.} WAP5: Black-Box Performance Debugging for Wide-Area Systems. In {\em WWW'06}.
+% 
+% \bibitem{whodunit} A. Chanda {\it et al.} Whodunit: Transactional Profiling for Multi-Tier Applications. In {\em EuroSys'07}.
+% 
+% \bibitem{distalyzer} K. Nagaraj {\it et al.} Structured Comparative Analysis of Systems Logs to Diagnose Performance Problems. In {\em NSDI'12}.
+% 
+% \bibitem{mystery} M. Chow {\it et al.} {The Mystery Machine: End-to-end Performance Analysis of Large-scale Internet Services}. In {\em OSDI'14}.
+% 
+% \bibitem{ComprehendingPerf} X. Yu {\it et al.} {{Comprehending performance from real-world execution traces: A device-driver case.}} In {\em ASPLOS'14}.
+% 
+% \bibitem{yu2011profiling} M. Yu {\it et al.} {Profiling Network Performance for Multi-tier Data Center Applications.} In {\em NSDI'11}. USENIX Association, 2011.
+% 
+% \bibitem{magpie} P. Barham {\it et al.} {{Using Magpie for request extraction and workload modelling.}} In {\em OSDI'04}.
+% 
+% \bibitem{pattern_mining} P. L\'{o}pez Cueva {\it et al.} {{Debugging Embedded Multimedia Application Traces Through Periodic Pattern Mining.}} In {\em EMSOFT'12}.
+% 
+% \bibitem{pattern_mining2} O. Iegorov {\it et al.} {{Data Mining Approach to Temporal Debugging of Embedded Streaming Applications.}} In {\em EMSOFT'15}
+% 
+% \bibitem{trace_factorisation} C. Kamdem Kengne {\it et al.} {{Efficiently rewriting large multimedia application execution traces with few event sequences.}} In {\em SIGKDD 2013}.
+% 
+% \bibitem{trace_diagnostic}  C. K. Kengne {\it et al.} {{Distance-based Trace Diagnosis for Multimedia Applications: Help me TED!}} In {\em ICSC 2013}.
+% 
+% \bibitem{Bhuiyan2012} M. Bhuiyan {\it et al.} {{Interactive pattern mining on hidden data: a sampling-based solution.}} In {\em CIKM'12}.
+% 
+% \bibitem{Boley2013} M. Boley {\it et al.} {{One click mining: Interactive local pattern discovery through implicit preference and performance learning.}} In {\em IDEAS'13 (ACM SIGKDD Workshop)}.
+% 
+% \bibitem{Leung2008} C. K. Sang Leung {\it et al.} {{WiFIsViz: Effective Visualization of Frequent Itemsets.}} In {\em ICDM'08}.
+% 
+% \bibitem{Leuski2000} A. Leuski {\it et al.} {{Strategy-based interactive cluster visualization for information retrieval.}} In {\em International Journal on Digital Libraries, 2000}.
+% 
+% \bibitem{Goethals2011} B. Goethals {\it et al.} {{Mime: A framework for interactive visual pattern mining.}}  In {\em PKDD'11}.
+% 
+% \bibitem{Bonchi2003} F. Bonchi {\it et al.} {{Exante: Anticipated data reduction in constrained pattern mining.}} In {\em PKDD'03}.
+% 
+% \bibitem{Bucila2002} C. Bucila {\it et al.} {{Dualminer: a dual-pruning algorithm for itemsets with constraints.}} In {\em KDDM'02}. %Knowledge Discovery and Data Mining, pages 42–51, 2002.
+% 
+% \bibitem{pdp2015} F. Trahay {\it et al.} {{Selecting points of interest in traces using patterns
+%     of events.}} In {\em PDP'15}.
+% 
+% \bibitem{compas2016} M. S. Mosli Bouksiaa {\it et al.} {{Détection automatique d’interférences entre threads.}} In {\em Compas'16}.
+
+
+%\bibliographystyle{abbrv}
+\bibliographystyle{IEEEtran}
+\bibliography{main}{}
+
+
+%\end{thebibliography}
+\end{document}
+
+%% Local Variables:
+%% TeX-master: "main.tex"
+%% ispell-dictionary: "en_US"
+%% mode: latex
+%% mode: flyspell
+%% coding: utf-8
+%% End:
