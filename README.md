@@ -37,7 +37,7 @@ des traces dans des formats divers. [[code
 source](https://gitlab.com/parallel-and-distributed-systems/easytraceanalyzer)]
 
 - **Développement de la librarie Pythia** qui fournit un service de collecte de trace et de prédictions pour les supports d’exécution
-[[code source](https://github.com/libPythia/pythia)]
+[[code source](https://github.com/libPythia/pythia)] [[publication](https://hal.archives-ouvertes.fr/hal-03750441/document)]
 
 ## Publications
 
@@ -58,10 +58,10 @@ Mohamed Said Mosli Bouksiaa, François Trahay, Alexis Lescouet, Gauthier Voron, 
 
 ### National conferences with peer review
 
-Alexis Colin, François Trahay, Denis Conan. *PYTHIA : un oracle pour guider les décisions des runtimes.* Conférence francophone d'informatique en Parallélisme Architecture et Système (Compas'2022).
+Alexis Colin, François Trahay, Denis Conan. *PYTHIA : un oracle pour guider les décisions des runtimes.* In Compas'2022.
 [[pdf](https://hal.archives-ouvertes.fr/hal-03754168/document)] [[bib](https://hal.archives-ouvertes.fr/hal-03754168v1/bibtex)]
 
-Alexis Colin, François Trahay. Factorisation de traces d’exécutions de programmes pour l’analyse et la prédiction. In Conférence en Parallélisme, Architecture et Système (Compas'2020).
+Alexis Colin, François Trahay. *Factorisation de traces d’exécutions de programmes pour l’analyse et la prédiction.* In Compas'2020.
 
 
 ## Documents utiles
