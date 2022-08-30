@@ -36,6 +36,9 @@ un outil extensible permettant l’implémentation d’analyses variés sur
 des traces dans des formats divers. [[code
 source](https://gitlab.com/parallel-and-distributed-systems/easytraceanalyzer)]
 
+- **Développement de la librarie Pythia** qui fournit un service de collecte de trace et de prédictions pour les supports d’exécution
+[[code source](https://github.com/libPythia/pythia)]
+
 ## Publications
 
 
