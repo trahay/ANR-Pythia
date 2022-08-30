@@ -43,7 +43,7 @@ source](https://gitlab.com/parallel-and-distributed-systems/easytraceanalyzer)]
 
 
 ### International conferences or journals with peer review
-Alexis Colin, François Trahay, Denis Conan. *PYTHIA: an oracle to guide runtime system decisions.* In IEEE Cluster, Heidelberg, Germany, 2022. 
+Alexis Colin, François Trahay, Denis Conan. *PYTHIA: an oracle to guide runtime system decisions.* In IEEE Cluster 2022. 
 [[pdf](https://hal.archives-ouvertes.fr/hal-03750441/document)] [[bib](https://hal.archives-ouvertes.fr/hal-03750441v1/bibtex)]
 
 Thao Truong, François Trahay, Jens Domke, Aleksandr Drozd, Emil Vatai, Jianwei Liao​, Mohamed Wahib, Balazs Gerofi. *Why Globally Re-shuffle? Revisiting Data Shuffling in Large Scale Deep Learning.*
