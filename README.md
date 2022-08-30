@@ -36,6 +36,30 @@ un outil extensible permettant l’implémentation d’analyses variés sur
 des traces dans des formats divers. [[code
 source](https://gitlab.com/parallel-and-distributed-systems/easytraceanalyzer)]
 
+## Publications
+
+
+### International conferences or journals with peer review
+Alexis Colin, François Trahay, Denis Conan. *PYTHIA: an oracle to guide runtime system decisions.* In IEEE Cluster, Heidelberg, Germany, 2022. 
+[[pdf](https://hal.archives-ouvertes.fr/hal-03750441/document)] [[bib](https://hal.archives-ouvertes.fr/hal-03750441v1/bibtex)]
+
+Thao Truong, François Trahay, Jens Domke, Aleksandr Drozd, Emil Vatai, Jianwei Liao​, Mohamed Wahib, Balazs Gerofi. *Why Globally Re-shuffle? Revisiting Data Shuffling in Large Scale Deep Learning.*
+In IPDPS 2022. [[pdf](https://hal.archives-ouvertes.fr/hal-03599740/document)] [[bib](https://hal.archives-ouvertes.fr/hal-03599740v1/bibtex)]
+
+Naas, M. I., Trahay, F., Colin, A., Olivier, P., Rubini, S., Singhoff, F., & Boukhobza, J. *EZIOTracer: unifying kernel and user space I/O tracing for data-intensive applications.*
+In SIGOPS Operating Systems Review. 55, 1 (July 2021), 88–98. [[pdf](https://hal.archives-ouvertes.fr/hal-03215663/document)] [[bib](https://dl.acm.org/doi/abs/10.1145/3469379.3469391)]
+
+Alexis Lescouet, Élisabeth Brunet, François Trahay, and Gaël Thomas. *Transparent Overlapping of Blocking Communication in MPI Applications.* in HPCC 2020.	[[pdf](https://hal.archives-ouvertes.fr/hal-03007204/document)] [[bib](https://hal.archives-ouvertes.fr/hal-03007204v1/bibtex)]
+
+Mohamed Said Mosli Bouksiaa, François Trahay, Alexis Lescouet, Gauthier Voron, Remi Dulong, Amina Guermouche, Elisabeth Brunet, Gaël Thomas. *Using differential execution analysis to identify thread interference.* In IEEE Transactions on Parallel and Distributed Systems (TPDS). 2019. [[pdf](https://hal.archives-ouvertes.fr/hal-02179717/document)] [[bib](https://hal.archives-ouvertes.fr/hal-02179717v1/bibtex)]
+
+### national conferences with peer review
+
+Alexis Colin, François Trahay, Denis Conan. *PYTHIA : un oracle pour guider les décisions des runtimes.* Conférence francophone d'informatique en Parallélisme Architecture et Système (Compas'2022).
+[[pdf](https://hal.archives-ouvertes.fr/hal-03754168/document)] [[bib](https://hal.archives-ouvertes.fr/hal-03754168v1/bibtex)]
+
+Alexis Colin, François Trahay. Factorisation de traces d’exécutions de programmes pour l’analyse et la prédiction. In Conférence en Parallélisme, Architecture et Système (Compas'2020).
+
 
 ## Documents utiles
 
