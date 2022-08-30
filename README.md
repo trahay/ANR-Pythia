@@ -53,7 +53,7 @@ Alexis Lescouet, Élisabeth Brunet, François Trahay, and Gaël Thomas. *Transpa
 
 Mohamed Said Mosli Bouksiaa, François Trahay, Alexis Lescouet, Gauthier Voron, Remi Dulong, Amina Guermouche, Elisabeth Brunet, Gaël Thomas. *Using differential execution analysis to identify thread interference.* In IEEE Transactions on Parallel and Distributed Systems (TPDS). 2019. [[pdf](https://hal.archives-ouvertes.fr/hal-02179717/document)] [[bib](https://hal.archives-ouvertes.fr/hal-02179717v1/bibtex)]
 
-### national conferences with peer review
+### National conferences with peer review
 
 Alexis Colin, François Trahay, Denis Conan. *PYTHIA : un oracle pour guider les décisions des runtimes.* Conférence francophone d'informatique en Parallélisme Architecture et Système (Compas'2022).
 [[pdf](https://hal.archives-ouvertes.fr/hal-03754168/document)] [[bib](https://hal.archives-ouvertes.fr/hal-03754168v1/bibtex)]
